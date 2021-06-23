@@ -32,17 +32,18 @@ public class CustomerDAO {
 //        });
 
 
-        List<Customer> customers = jdbcTemplate.query("Select * from customer", new RowMapper<Customer>() {
-            @Override
-            public Customer mapRow(ResultSet rs, int rowNum) throws SQLException {
-                int id = rs.getInt("id");
-                String name = rs.getString("name");
-                String address = rs.getString("address");
-                return new Customer(id, name, address);
-            }
+        List<Customer> customers = jdbcTemplate.query("Select * from customer", (rs, rowNumber) -> {
+
+
+            int id = rs.getInt("id");
+            String name = rs.getString("name");
+            String address = rs.getString("address");
+            return new Customer(id, name, address);
+
         });
 
         return customers;
+
 
 
 
